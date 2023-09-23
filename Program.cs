@@ -32,21 +32,22 @@ namespace Targa
                 } while (i < targa.Length);
             } while (!controllo);
 
-            for (int i = 0; i < targa.Length; i++)
+            for (int k = 0; k < targa.Length; k++)
             {
-                if (i < 2)
+                if (targa[k] > 64 && targa[k] < 91)
                 {
-                    valoreFinale = valoreFinale * 26 + ((int)targa[i] - (int)'A');
+                    lettere += targa[k];
                 }
-                else if (i >= 2 && i < 5)
+                else
                 {
-                    valoreFinale = valoreFinale * 10 + ((int)targa[i] - (int)'0');
-                }
-                else if (i >= 5 && i < 7)
-                {
-                    valoreFinale = valoreFinale * 26 + ((int)targa[i] - (int)'A');
+                    numeri += targa[k];                
                 }
             }
+            for (int i = 0; i < lettere.Length; i++)
+            {
+                valoreFinale += (25 - (90 - lettere[i])) * (int)Math.Pow(26, (3 - i)) * (int)Math.Pow(10, 3);
+            }
+            valoreFinale += Convert.ToInt32(numeri);
             Console.WriteLine($"Il valore della targa {targa} è {valoreFinale}");
             Console.ReadLine();
         }
